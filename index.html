@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FPL Academy — Learn by Level | FPL Family Network</title>
+<meta name="description" content="The FPL Family Network Academy — courses by membership level: Volunteer, Friends & Family, Warrior, Kings & Queens, Demi-God." />
+<link rel="icon" type="image/png" href="fpl-emblem.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#14223F; --navy-2:#1B2C54; --gold:#C6A249; --gold-lt:#E3C778;
+    --cream:#F4F1E8; --cream-2:#D9D5C7; --muted:#9DA8C2;
+    --vol:#2E9E6B; --vol-2:#7BD8AC;
+    --ff:#4A90D9; --ff-2:#9CCBF5;
+    --war:#C6A249; --war-2:#EFD790;
+    --kq:#7C4DBE; --kq-2:#C5A6F0;
+    --dg:#8FA6BC; --dg-2:#E8F0F8;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Inter',-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--cream);line-height:1.6;background:var(--navy);
+    background-image:radial-gradient(1200px 700px at 50% -15%, #243a6b 0%, var(--navy-2) 42%, var(--navy) 80%);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  nav{position:sticky;top:0;z-index:50;background:rgba(16,26,50,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(198,162,73,.16)}
+  nav .row{display:flex;align-items:center;gap:14px;height:62px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none;color:inherit}
+  .brand img{width:32px;height:32px;object-fit:contain}
+  .brand b{font-family:var(--serif);font-weight:600;font-size:17px;color:var(--cream)}
+  .brand b span{color:var(--gold)}
+  .tabs{display:flex;gap:4px;margin-left:auto;overflow-x:auto}
+  .tab{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:8px 13px;border-radius:20px;white-space:nowrap}
+  .tab:hover{color:var(--gold-lt)}
+  .tab.on{background:rgba(198,162,73,.15);color:var(--gold-lt)}
+  header.acad{padding:38px 0 8px}
+  header.acad h1{font-family:var(--serif);font-weight:600;font-size:40px;color:var(--cream)}
+  header.acad p{color:var(--muted);font-size:15px;margin-top:4px}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;padding:20px 0 6px}
+  .chip{font-size:13px;font-weight:600;padding:8px 16px;border-radius:20px;border:1px solid rgba(198,162,73,.3);color:var(--cream-2);cursor:pointer;background:transparent;transition:.15s}
+  .chip:hover{border-color:var(--gold)}
+  .chip.on{background:linear-gradient(180deg,var(--gold-lt),var(--gold));color:var(--navy);border-color:transparent}
+  section.lvl{padding:26px 0 6px}
+  .lvl-head{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+  .lvl-head h2{font-family:var(--serif);font-weight:600;font-size:27px}
+  .lvl-badge{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:5px 13px;border-radius:14px}
+  .lvl-note{font-size:13px;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  .cc{background:rgba(10,18,38,.5);border:1px solid rgba(198,162,73,.18);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:.18s}
+  .cc:hover{transform:translateY(-3px);border-color:rgba(198,162,73,.45)}
+  .thumb{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .thumb .emb{position:absolute;top:10px;right:12px;width:30px;height:30px;object-fit:contain;opacity:.95;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+  .thumb .ttl{font-family:var(--serif);font-weight:700;font-size:22px;line-height:1.15;text-align:center;padding:0 26px;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+  .thumb .tier{position:absolute;bottom:10px;left:12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:3px 10px;border-radius:10px;background:rgba(0,0,0,.35);backdrop-filter:blur(4px)}
+  .cbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .cbody .meta{font-size:12.5px;color:var(--muted)}
+  .cbody .btn{margin-top:auto;display:block;text-align:center;font-size:13.5px;font-weight:600;padding:10px 12px;border-radius:22px;text-decoration:none;cursor:pointer;border:none;transition:.15s}
+  .btn-open{background:linear-gradient(180deg,var(--gold-lt),var(--gold));color:var(--navy)}
+  .btn-open:hover{filter:brightness(1.06)}
+  .btn-lock{background:rgba(255,255,255,.05);border:1px solid rgba(198,162,73,.4);color:var(--gold-lt)}
+  .btn-lock:hover{background:rgba(198,162,73,.12)}
+  .locked .thumb::after{content:"";position:absolute;inset:0;background:rgba(10,15,30,.44);backdrop-filter:blur(1.5px)}
+  .locked .thumb .lock{position:absolute;z-index:2;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
+  .locked .thumb .ttl{opacity:.85}
+  .prog{height:5px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+  .prog i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold-lt))}
+  footer{border-top:1px solid rgba(198,162,73,.16);margin-top:48px;padding:30px 0;text-align:center;color:var(--muted);font-size:13px}
+  footer a{color:var(--cream-2);text-decoration:none;margin:0 8px}
+  footer a:hover{color:var(--gold-lt)}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);background:#16171b;border:1px solid rgba(198,162,73,.5);color:var(--cream);font-size:14px;padding:12px 22px;border-radius:30px;transition:.3s;z-index:99;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap row">
+  <a class="brand" href="https://fplfamilynetwork.com"><img src="fpl-emblem.png" alt="FPL emblem"/><b>FPL <span>Academy</span></b></a>
+  <div class="tabs">
+    <a class="tab" href="#" onclick="toast('The family feed lives in the community — opening it');window.open('https://vibe.fplfamilynetwork.com/web/activity');return false">Feed</a>
+    <a class="tab on" href="#courses">Courses</a>
+    <a class="tab" href="#" onclick="toast('Events calendar — coming soon in v2');return false">Events</a>
+    <a class="tab" href="#" onclick="toast('Level Up — mission points & leaderboard, coming soon');return false">Level Up</a>
+    <a class="tab" href="https://fplfamilynetwork.com#tiers">Upgrade</a>
+  </div>
+</div></nav>
+
+<header class="acad"><div class="wrap">
+  <h1 id="courses">Courses</h1>
+  <p>Learn by level — the ladder rises with you. Education is free; empowerment unlocks once, for life.</p>
+</div></header>
+
+<div class="wrap chips">
+  <button class="chip on" onclick="filt('all',this)">All</button>
+  <button class="chip" onclick="filt('vol',this)">Volunteer</button>
+  <button class="chip" onclick="filt('ff',this)">Friends &amp; Family</button>
+  <button class="chip" onclick="filt('war',this)">Warrior</button>
+  <button class="chip" onclick="filt('kq',this)">Kings &amp; Queens</button>
+  <button class="chip" onclick="filt('dg',this)">Demi-God</button>
+</div>
+
+<section class="lvl" data-lvl="vol"><div class="wrap">
+  <div class="lvl-head"><h2>Volunteer</h2><span class="lvl-badge" style="background:rgba(46,158,107,.18);color:var(--vol-2)">Free · Level 1</span><span class="lvl-note">Your pledge, your duty, your privileges</span></div>
+  <div class="grid">
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1d5c40,var(--vol) 55%,var(--vol-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Volunteer Orientation</div><span class="tier" style="color:var(--vol-2)">Volunteer</span></div>
+      <div class="cbody"><div class="meta">3 short videos · Start here</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('Coming soon — recording in progress')">Start course</a></div></div>
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1d5c40,var(--vol) 55%,var(--vol-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Your Duty as a Volunteer</div><span class="tier" style="color:var(--vol-2)">Volunteer</span></div>
+      <div class="cbody"><div class="meta">3 short videos · The mission &amp; your part</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('Coming soon — recording in progress')">Start course</a></div></div>
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1d5c40,var(--vol) 55%,var(--vol-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Your Privileges as a Volunteer</div><span class="tier" style="color:var(--vol-2)">Volunteer</span></div>
+      <div class="cbody"><div class="meta">3 short videos · Everything you receive free</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('Coming soon — recording in progress')">Start course</a></div></div>
+  </div>
+</div></section>
+
+<section class="lvl" data-lvl="ff"><div class="wrap">
+  <div class="lvl-head"><h2>Friends &amp; Family</h2><span class="lvl-badge" style="background:rgba(74,144,217,.18);color:var(--ff-2)">Free · Level 2 · Educate</span><span class="lvl-note">The learning floor — free by doctrine</span></div>
+  <div class="grid">
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1e4976,var(--ff) 55%,var(--ff-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Welcome to the Family</div><span class="tier" style="color:var(--ff-2)">Friends &amp; Family</span></div>
+      <div class="cbody"><div class="meta">3 sections · Start here</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('Coming soon — being written from the books')">Start course</a></div></div>
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1e4976,var(--ff) 55%,var(--ff-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Why Financial Freedom Matters</div><span class="tier" style="color:var(--ff-2)">Friends &amp; Family</span></div>
+      <div class="cbody"><div class="meta">3 sections · The FPL definition of freedom</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('Coming soon — being written from the books')">Start course</a></div></div>
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1e4976,var(--ff) 55%,var(--ff-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">The Hu-Kno-Mi Path</div><span class="tier" style="color:var(--ff-2)">Friends &amp; Family</span></div>
+      <div class="cbody"><div class="meta">3 sections · Become a Hu-Kno-Mian</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('Coming soon — being written from the books')">Start course</a></div></div>
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1e4976,var(--ff) 55%,var(--ff-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Good Money, Bad Money Path</div><span class="tier" style="color:var(--ff-2)">Friends &amp; Family</span></div>
+      <div class="cbody"><div class="meta">3 sections · Become a Good Money Maker</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('Coming soon — being written from the books')">Start course</a></div></div>
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1e4976,var(--ff) 55%,var(--ff-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">The 2 Questions Path</div><span class="tier" style="color:var(--ff-2)">Friends &amp; Family</span></div>
+      <div class="cbody"><div class="meta">3 sections · Clarity before speed</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('Coming soon — being written from the books')">Start course</a></div></div>
+    <div class="cc"><div class="thumb" style="background:linear-gradient(135deg,#1e4976,var(--ff) 55%,var(--ff-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Rise Again — Weekly Live</div><span class="tier" style="color:var(--ff-2)">Friends &amp; Family</span></div>
+      <div class="cbody"><div class="meta">Live replays · Every week with the family</div><div class="prog"><i style="width:0%"></i></div><a class="btn btn-open" onclick="toast('First live session announcing soon')">See schedule</a></div></div>
+  </div>
+</div></section>
+
+<section class="lvl" data-lvl="war"><div class="wrap">
+  <div class="lvl-head"><h2>Warrior</h2><span class="lvl-badge" style="background:rgba(198,162,73,.18);color:var(--gold-lt)">₹4,999 / $99 one-time · Level 3 · Empower</span><span class="lvl-note">Locked — rises when you become a Warrior</span></div>
+  <div class="grid">
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#6d5417,var(--war) 55%,var(--war-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Choose Your Vehicle</div><span class="tier" style="color:var(--war-2)">Warrior</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E3C778" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">The 13 passive-income vehicles</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Warrior to unlock →</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#6d5417,var(--war) 55%,var(--war-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">The Creator Path</div><span class="tier" style="color:var(--war-2)">Warrior</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E3C778" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">YouTube, coaching &amp; digital products</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Warrior to unlock →</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#6d5417,var(--war) 55%,var(--war-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Good-Money Product Lab</div><span class="tier" style="color:var(--war-2)">Warrior</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E3C778" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Build &amp; score your first good product</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Warrior to unlock →</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#6d5417,var(--war) 55%,var(--war-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">ProFit — Professional Fitness</div><span class="tier" style="color:var(--war-2)">Warrior</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E3C778" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Future-proof your career engine</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Warrior to unlock →</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#6d5417,var(--war) 55%,var(--war-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Exit Bad Money</div><span class="tier" style="color:var(--war-2)">Warrior</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E3C778" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Plank to platform — leave the trap safely</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Warrior to unlock →</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#6d5417,var(--war) 55%,var(--war-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Signal Over Noise</div><span class="tier" style="color:var(--war-2)">Warrior</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E3C778" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Guard your attention in a noisy world</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Warrior to unlock →</a></div></div>
+  </div>
+</div></section>
+
+<section class="lvl" data-lvl="kq"><div class="wrap">
+  <div class="lvl-head"><h2>Kings &amp; Queens</h2><span class="lvl-badge" style="background:rgba(124,77,190,.2);color:var(--kq-2)">₹49,999 / $999 one-time · Level 4</span><span class="lvl-note">Locked — the throne room opens after Warrior</span></div>
+  <div class="grid">
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#3b2260,var(--kq) 55%,var(--kq-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">The Creator Kit</div><span class="tier" style="color:var(--kq-2)">Kings &amp; Queens</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5A6F0" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Your own website, checkout &amp; video vault</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Kings &amp; Queens →</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#3b2260,var(--kq) 55%,var(--kq-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Your Own Platform</div><span class="tier" style="color:var(--kq-2)">Kings &amp; Queens</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5A6F0" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Own domain, own LMS, own money — no middlemen</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Kings &amp; Queens →</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#3b2260,var(--kq) 55%,var(--kq-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl">Your First 100 Students</div><span class="tier" style="color:var(--kq-2)">Kings &amp; Queens</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C5A6F0" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Launch, funnel &amp; serve with the FPL engine</div><a class="btn btn-lock" href="https://fplfamilynetwork.com#tiers">Upgrade to Kings &amp; Queens →</a></div></div>
+  </div>
+</div></section>
+
+<section class="lvl" data-lvl="dg"><div class="wrap">
+  <div class="lvl-head"><h2>Demi-God</h2><span class="lvl-badge" style="background:rgba(143,166,188,.18);color:var(--dg-2)">Level 5 · By invitation, success-based</span><span class="lvl-note">Locked — earned, never bought upfront</span></div>
+  <div class="grid">
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#33465c,var(--dg) 55%,var(--dg-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl" style="color:#0e1a2c">Coach Certifications</div><span class="tier" style="color:#22364e">Demi-God</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8F0F8" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Hu-Kno-Mi · Transkeyer · ProFit — coach the world</div><a class="btn btn-lock" onclick="toast('Demi-God opens by invitation after Kings & Queens')">By invitation only</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#33465c,var(--dg) 55%,var(--dg-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl" style="color:#0e1a2c">Hu-Kno-Mi Product Audits</div><span class="tier" style="color:#22364e">Demi-God</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8F0F8" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">Get your product certified good-money</div><a class="btn btn-lock" onclick="toast('Demi-God opens by invitation after Kings & Queens')">By invitation only</a></div></div>
+    <div class="cc locked"><div class="thumb" style="background:linear-gradient(135deg,#33465c,var(--dg) 55%,var(--dg-2))"><img class="emb" src="fpl-emblem.png" alt=""/><div class="ttl" style="color:#0e1a2c">The Demi-God Path</div><span class="tier" style="color:#22364e">Demi-God</span><div class="lock"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8F0F8" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div></div>
+      <div class="cbody"><div class="meta">You pay only after your success — that is the deal</div><a class="btn btn-lock" onclick="toast('Demi-God opens by invitation after Kings & Queens')">By invitation only</a></div></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div style="margin-bottom:8px"><a href="https://fplfamilynetwork.com">FPL Family Network</a> · <a href="https://vibe.fplfamilynetwork.com/web/activity">Community</a> · <a href="https://fplfamilynetwork.com#tiers">Upgrade</a> · <a href="https://futureproofinglifestyle.com">The Movement</a></div>
+  © <span id="yr">2026</span> Future Proofing Lifestyle Network · FPL Academy v1
+</div></footer>
+
+<div class="toast" id="toast"></div>
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+var tt;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show')},2800);}
+function filt(k,el){
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on');
+  document.querySelectorAll('section.lvl').forEach(function(s){s.style.display=(k==='all'||s.getAttribute('data-lvl')===k)?'':'none'});
+}
+</script>
+</body>
+</html>
